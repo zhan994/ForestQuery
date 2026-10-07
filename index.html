@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="ForestQuery: Boundary-Aware and Spatially Anchored Query Learning for Unified Forest Point Cloud Segmentation">
+  <meta name="keywords"
+    content="Forest Scene Understanding, Point Cloud Segmentation, Query Learning, Forest Point Clouds.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ForestQuery: Boundary-Aware and Spatially Anchored Query Learning for Unified Forest Point Cloud Segmentation
+  </title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <style>
+    .custome-flex-container {
+      display: flex;
+      justify-content: space-between;
+      /* 等间隔 */
+      align-items: center;
+      /* 垂直居中 */
+      width: 50%;
+      /* 容器宽度 */
+      margin: 0 auto;
+    }
+
+    .custome-flex-item {
+      flex: 1;
+      /* 子元素等比例扩展 */
+      text-align: center;
+      /* 居中内容 */
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+        <a class="navbar-item" href="https://zhan994.github.io/">
+          <span class="icon">
+            <i class="fas fa-home"></i>
+          </span>
+        </a>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">ForestQuery: Boundary-Aware and Spatially Anchored Query Learning
+              for Unified Forest Point Cloud Segmentation</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                Zhihao Zhan<sup>1,2</sup>,
+              </span>
+              <span class="author-block">
+                Le Tao<sup>2</sup>,
+              </span>
+              <span class="author-block">
+                Yifei Tian<sup>3</sup>,
+              </span>
+              <span class="author-block">
+                Xin Liu<sup>4</sup>,
+              </span>
+              <span class="author-block">
+                Jie Yuan<sup>1&dagger;</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Nanjing University, </span>
+              <span class="author-block"><sup>2</sup>TopXGun Robotics, </span>
+              <br>
+              <span class="author-block"><sup>3</sup>Nanjing University of Posts and Telecommunications</span>,
+              <span class="author-block"><sup>4</sup>Tsinghua University</span>
+            </div>
+
+            <div class="is-size-6 publication-authors">
+              <!-- <span class="author-block"><sup>*</sup>Equal contribution</span> -->
+              <span class="author-block"><sup>&dagger;</sup>Corresponding author</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/2610.03403.pdf"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2610.03403" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/zhan994/ForestQuery"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <!-- Hugging Face -->
+                <span class="link-block">
+                  <a href="https://huggingface.co/datasets/zhan994/ForestQuery"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-database"></i>
+                    </span>
+                    <span>Dataset</span>
+                  </a>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Section Teaser -->
+  <section class="hero teaser" id="teaser" aria-label="ForestQuery overview">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <figure class="paper-figure">
+          <a href="./imgs/Teaser.png" target="_blank" rel="noopener"
+            aria-label="View teaser at full resolution (opens in a new tab)">
+            <img src="./imgs/Teaser.png" width="1972" height="696"
+              alt="Input point clouds, semantic segmentation, and individual-tree instance segmentation in TUWIEN and Yuchen forest scenes."
+              fetchpriority="high" decoding="async">
+          </a>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Section Abstract -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Forest point cloud segmentation is fundamental for fine-grained 3D forest scene understanding, yet remains
+              challenging due to irregular tree structures, severe occlusions, density variations, and ambiguous
+              instance boundaries.
+              Recent query-based forest segmentation methods have shown promise for unified semantic and instance
+              prediction, but they still insufficiently exploit forest-specific spatial structure and account for
+              boundary uncertainty.
+              In this paper, we propose ForestQuery, a boundary-aware and spatially anchored query learning framework
+              for
+              unified forest point cloud segmentation.
+              ForestQuery enhances instance and semantic query learning through two complementary designs.
+              Specifically, boundary uncertainty is explicitly modeled to guide reliable instance query construction and
+              modulate query optimization through adaptive loss reweighting.
+              Meanwhile, spatially anchored semantic query enhancement (SA-SQE) introduces learnable 3D anchors encoding
+              forest vertical stratification priors to enrich semantic queries with explicit spatial references.
+              We evaluate ForestQuery on multiple public forest point cloud benchmarks and a self-collected annotated
+              real-world dataset.
+              Extensive experiments demonstrate consistent improvements in both individual-tree segmentation and
+              semantic segmentation across diverse forest scenes.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Section System Pipeline -->
+  <section class="section" id="system-pipeline" aria-labelledby="system-pipeline-title">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3" id="system-pipeline-title">System Pipeline</h2>
+      <figure class="paper-figure">
+        <a href="./imgs/System.png" target="_blank" rel="noopener"
+          aria-label="View system pipeline at full resolution (opens in a new tab)">
+          <img src="./imgs/System.png" width="1756" height="1225"
+            alt="ForestQuery pipeline: feature encoding, auxiliary predictions, boundary-guided instance query construction, spatially anchored semantic query enhancement, and unified query decoding."
+            loading="lazy" decoding="async">
+        </a>
+        <figcaption>
+          <strong>Overview of the proposed ForestQuery framework.</strong>
+          A shared sparse 3D backbone supports boundary-aware instance query construction and joint query decoding.
+          Boundary cues guide instance query construction and optimization, while SA-SQE injects learnable 3D anchors
+          encoding forest vertical stratification priors into semantic queries.
+          The resulting queries are jointly decoded with shared scene features to predict semantic and individual-tree
+          instance masks.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+
+  <!-- Section SOTA Comparison -->
+  <section class="section" id="sota-comparison" aria-labelledby="sota-comparison-title">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3" id="sota-comparison-title">Comparison with State-of-the-Art Methods</h2>
+      <p class="figure-intro">
+        Qualitative comparisons on FOR-instanceV2. Click any figure to view it at full resolution.
+      </p>
+      <div class="comparison-result">
+        <figure class="paper-figure">
+          <a href="./imgs/Instance_ForInstanceV2.png" target="_blank" rel="noopener"
+            aria-label="View instance segmentation comparison at full resolution (opens in a new tab)">
+            <img src="./imgs/Instance_ForInstanceV2.png" width="1493" height="1664"
+              alt="Qualitative comparison of individual-tree instance segmentation across three FOR-instance V2 forest scenes, with colored circles highlighting local differences."
+              loading="lazy" decoding="async">
+          </a>
+          <figcaption>
+            <strong>Individual-tree instance segmentation.</strong> Ground points are shown in gray, while different
+            colors denote individual-tree instances. Yellow circles highlight over-segmentation, blue circles indicate
+            undetected trees, and red circles mark points incorrectly assigned from one tree to a neighboring tree.
+          </figcaption>
+        </figure>
+      </div>
+      
+      <div class="comparison-result">
+        <figure class="paper-figure">
+          <a href="./imgs/Semantic_ForInstanceV2.png" target="_blank" rel="noopener"
+            aria-label="View semantic segmentation comparison at full resolution (opens in a new tab)">
+            <img src="./imgs/Semantic_ForInstanceV2.png" width="1493" height="1664"
+              alt="Qualitative comparison of semantic segmentation across three FOR-instance V2 forest scenes, with colored circles highlighting local differences."
+              loading="lazy" decoding="async">
+          </a>
+          <figcaption>
+            <strong>Semantic segmentation.</strong> Leaf, wood, and ground points are shown in green, brown, and gray,
+            respectively. Red circles highlight confusion between wood and leaf points, while blue circles indicate tree
+            points incorrectly classified as ground.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>
+@misc{zhan2026forestqueryboundaryawarespatiallyanchored,
+      title={ForestQuery: Boundary-Aware and Spatially Anchored Query Learning for Unified Forest Point Cloud Segmentation}, 
+      author={Zhihao Zhan and Le Tao and Yifei Tian and Xin Liu and Jie Yuan},
+      year={2026},
+      eprint={2610.03403},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2610.03403}, 
+}
+      </code></pre>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <a class="icon-link" href="https://arxiv.org/abs/2610.03403">
+          <svg class="svg-inline--fa fa-file-pdf fa-w-12" aria-hidden="true" focusable="false" data-prefix="fas"
+            data-icon="file-pdf" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="">
+            <path fill="currentColor"
+              d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z">
+            </path>
+          </svg><!-- <i class="fas fa-file-pdf"></i> Font Awesome fontawesome.com -->
+        </a>
+        <a class="icon-link" href="https://github.com/zhan994/ForestQuery" disabled="">
+          <svg class="svg-inline--fa fa-github fa-w-16" aria-hidden="true" focusable="false" data-prefix="fab"
+            data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" data-fa-i2svg="">
+            <path fill="currentColor"
+              d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z">
+            </path>
+          </svg>
+        </a>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This website is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+            <p>
+              We borrow the <a href="https://github.com/nerfies/nerfies.github.io">source code</a> for our website.
+              We sincerely appreciate Nerfies authors for their awesome templates.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
